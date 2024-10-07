@@ -1,0 +1,126 @@
+//Ceil value of Division
+  
+#include<bits/stdc++.h>
+using namespace std;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+
+
+typedef long long ll;
+typedef long double ld;
+typedef tree<
+ll,
+null_type,
+less_equal<ll>,
+rb_tree_tag,
+tree_order_statistics_node_update>
+ordered_set;
+
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+
+#define db double
+#define pii pair<ll,ll>
+#define f(i,a,b) for(ll i=a;i<b;i++)
+#define fi(i,a,b,c) for(ll i=a;i<b;i+=c)
+#define fr(i,a,b) for(ll i=a;i>=b;i--)
+#define fri(i,a,b,c) for(ll i=a;i>=b;i-=c)
+#define pb push_back
+#define ss second
+#define ff first
+#define in insert
+#define sq(x)  (x*x)
+#define all(a)  a.begin(),a.end()
+#define nl '\n'
+#define npii ll
+#define mnpq  priority_queue <npii, vector<npii>, greater<npii> >
+
+
+
+
+
+const ll  N = 200004;
+const ll mod = 1e9 + 7;
+
+const ll neginf= -1e18;
+const ll inf = 1e9;
+const ld eps= 1e-9;
+
+
+/// avoid Wrong answer
+/// think 2 minute before submission
+/// check input output before submission
+///use binary search for maximum minimum problem
+
+
+ll sqr(ll d){
+   return d*d;
+ }
+
+void solve(){
+
+    ll n;
+    cin>>n;
+    ll a[n];
+
+    vector<ld>v;
+    f(i,0,n){
+       cin>>a[i];
+       ld e=a[i];
+       v.pb(log(log(e)));
+    }
+
+    ll im=0;
+    f(i,1,n){
+
+        if(a[i]==1&&a[i-1]>a[i]){
+              im=1;
+        }
+    }
+
+
+
+    if(im){
+         cout<<-1<<endl;
+         return;
+    }
+
+    ll ct=0;
+
+    f(i,1,n){
+        if(a[i-1]==1)continue;
+
+               ld need=v[i-1]-v[i];
+
+
+               if(need>eps){
+                   ll x=1+((need-eps)/log(2.0));
+                   if(x<0){
+                     x=0;
+                   }
+                   ct+=x;
+                   v[i]+=(x*log(2.0));
+
+               }
+
+    }
+
+    cout<<ct<<endl;
+
+
+
+}
+int main(){
+
+       ios_base::sync_with_stdio(false);
+       cin.tie(NULL);
+       cout.tie(NULL);
+
+        ll t;
+        cin>>t;
+        while(t--){
+             solve();
+        }
+
+
+}
